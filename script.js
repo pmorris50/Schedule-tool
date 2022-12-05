@@ -3,6 +3,7 @@
 // in the html.
 var timeBlockHour = $('.time-block');
 var events = $('.description');
+console.log(events);
 
 
 
@@ -12,7 +13,7 @@ function currentTime(){
   var currentHour = dayjs().format('h:mm:ss a');
   //console.log(currentDate);
   $("#currentDay").text(currentDate);
-  console.log(currentHour);
+  //console.log(currentHour);
 
 };
 //calling this function will color code, past present, or future. 
@@ -30,8 +31,8 @@ function setColor(){
   timeBlockHour.each(function(i){
      var actualTime = parseInt(dayjs().format('H'));
      var scheduleTime = parseInt($(this).attr('id').split('-')[1]);
-      console.log(i, actualTime);
-      console.log(i, scheduleTime);
+     // console.log(i, actualTime);
+     // console.log(i, scheduleTime);
 //actualTime = scheduleTime then class = present
     if(actualTime == scheduleTime){
       $(this).removeClass('future past')
@@ -45,17 +46,33 @@ function setColor(){
       $(this).addClass('future');
 
     } else{
-      console.log('you are a time traveller');
+      //console.log('you are a time traveller');
     }
 })
 };
  function storeEvents(){
-  $('.saveBtn').click(function(){
-    localStorage.setItem('events', JSON.stringify(events.value))
+//  console.log(events.value);
+  $('.saveBtn').click('on', function(event){
+    console.log('event', event);
+    // we know we clicked on event.target -> $(this).parent().childen(1).val();
+
+    var textValue = $(this).parent().children()[1].value; // what we want to save
+    var workingIndex = $(this).attr('data-hour'); // index we are gopnna save it to
+    console.log(workingIndex)
+    console.log(textValue);
+    var currentlyInStorage = JSON.parse(localStorage.getItem('events')) || []// what was previously saved
+    currentlyInStorage[workingIndex] = textValue; // updated previously saved with the new text in specific index
+    localStorage.setItem('events', JSON.stringify(currentlyInStorage)) // new storage set
   })
 };
+// render locla storange on page load
+function renderLocalOnLoad() {
+  // retrieve local storage
+  // parse that so its understood as array
+  // using a for loop of your choice->read one value from the local storage array and place value in corresponding textarea.
+}
 
-
+renderLocalOnLoad();
 
 
         //MAY NOT NEED

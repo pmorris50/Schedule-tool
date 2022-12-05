@@ -2,6 +2,10 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var timeBlockHour = $('.time-block');
+var events = $('.description');
+
+
+
 
 function currentTime(){
   var currentDate = dayjs().format('dddd, MMMM D YYYY');
@@ -43,29 +47,31 @@ function setColor(){
     } else{
       console.log('you are a time traveller');
     }
-
-
-
-
-
-
+})
+};
+ function storeEvents(){
+  $('.saveBtn').click(function(){
+    localStorage.setItem('events', JSON.stringify(events.value))
   })
-
-
-
-};
-function storage(){
-
-
-
 };
 
 
+
+
+        //MAY NOT NEED
+// function eventsPersist(){
+//   $('.description').click(function(note){
+//     note.preventDefualt()
+//    })
+//   }
 
 
 $(function () {
+  storeEvents();
   currentTime();
   setColor();
+  
+  // eventsPersist(); function to keep events on webpage when refreshed... IDEA ALERT.. run a LocalStorage.getItem AFTER LocalStorage.setITEM
  // setInterval(1000);
 
   // TODO: Add a listener for click events on the save button. This code should
@@ -91,3 +97,6 @@ $(function () {
 
 currentTime();
 setInterval(currentTime, 60000);
+
+
+

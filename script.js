@@ -66,13 +66,36 @@ function setColor(){
   })
 };
 // render locla storange on page load
-function renderLocalOnLoad() {
+// function renderLocalOnLoad() {
+// var currentStorage = JSON.parse(localStorage.getItem('events')) || [];
+// console.log(currentStorage);
+// if(currentStorage != null){
+//   for(i = 0; i< events.length; i++){
+//     events.textContent = currentStorage;
+
+//   }
+
+// }
+  
+// }
+
+function renderLocalOnLoad(){
+  var currentStorage =JSON.parse(localStorage.getItem('events'))
+
+  for(i = 0; i < events.length; i++)
+  if(currentStorage != null){
+    $(events[i]).text(currentStorage[i]);
+  }
+
+}
+
+
   // retrieve local storage
   // parse that so its understood as array
   // using a for loop of your choice->read one value from the local storage array and place value in corresponding textarea.
-}
 
-renderLocalOnLoad();
+
+//renderLocalOnLoad();
 
 
         //MAY NOT NEED
@@ -87,6 +110,7 @@ $(function () {
   storeEvents();
   currentTime();
   setColor();
+  renderLocalOnLoad();
   
   // eventsPersist(); function to keep events on webpage when refreshed... IDEA ALERT.. run a LocalStorage.getItem AFTER LocalStorage.setITEM
  // setInterval(1000);
